@@ -42,17 +42,22 @@ async function register() {
         salt
     };
 
-    // Agregar el usuario al array
-    users.push(user);
+    Swal.fire({
+        icon: "success",
+        title: "¡Registro exitoso!",
+    }).then(() => {
+        /// Agregar el usuario al array
+        users.push(user);
 
-    // Guardar los usuarios en localStorage
-    localStorage.setItem('users', JSON.stringify(users));
+        // Guardar los usuarios en localStorage
+        localStorage.setItem('users', JSON.stringify(users));
 
-    // Limpiar el formulario
-    document.getElementById('registrationForm').reset();
+        // Limpiar el formulario
+        document.getElementById('registrationForm').reset();
 
-    // Redirigir a la página de inicio de sesión
-    window.location.href = 'inicio_sesion.html';
+        // Redirigir a la página de inicio de sesión
+        window.location.href = 'inicio_sesion.html';
+    });
 }
 
 async function login() {
@@ -75,12 +80,21 @@ async function login() {
             // Contraseña válida, almacenar el usuario actual en localStorage
             localStorage.setItem('currentUser', JSON.stringify(user));
 
-            // Redirigir al index.html (o a la página que desees)
-            window.location.href = 'index.html';
+            Swal.fire({
+                icon: "success",
+                title: "¡Bienvenido!",
+            }).then(() => {
+                // Redirigir al index.html (o a la página que desees)
+                window.location.href = 'index.html';
+            });
             return;
         }
     }
 
     // Mostrar mensaje de error (puedes personalizar según tus necesidades)
-    alert('Email o contraseña incorrectos. Por favor, inténtelo de nuevo.');
+    Swal.fire({
+        icon: "error",
+        title: "¡Error!",
+        text: "El correo electrónico o la contraseña son incorrectos.",
+    });
 }
